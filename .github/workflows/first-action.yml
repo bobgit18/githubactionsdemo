@@ -7,5 +7,7 @@ jobs:
       - name: Step 1 Printing
         run: echo "This is my first step"
       - name: Step 2 Print Goodbye
-        run: echo " Goodbye"
+        run: |
+          echo "Wait I am coming"
+          echo "Goodbye"
       
