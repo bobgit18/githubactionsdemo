@@ -3,6 +3,9 @@
 name: Azure ARM
 # Controls when the workflow will run
 on: [push]
+
+env:
+ AZURE_RG: GitHubaction-Clouddemo
 jobs:
   build-adn-deploy:
     runs-on: ubuntu-latest
@@ -13,14 +16,14 @@ jobs:
     # log into Azure
      - uses: azure/login@v1
        with:
-         creds: ${{ secrets.AZURE_CREDENTIALS }}
+         creds: ${{ secrets.ARM_CREDENTIALS }}
 
     # Deploy ARM template
      - name: Run ARM Deploy
        uses: azure/arm-deploy@v1
        with:
          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
-         resourceGroupName: ${{ secrets.AZURE_RG }}
+         resourceGroupName: ${AZURE_RG}
          template: ./azuredeploy.json
          parameters: storageAccountType=Standard_LRS
 
